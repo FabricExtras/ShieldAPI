@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "shieldapi",
+	"version": "${version}",
+	"name": "Shield API",
+	"description": "Creating shields with custom models was never easier!",
+	"authors": [
+		"TheRedBrain"
+	],
+	"contact": {
+		"sources": "https://github.com/FabricExtras/ShieldAPI"
+	},
+	"license": "MIT",
+	"icon": "assets/shieldapi/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.github.theredbrain.shieldapi.ShieldAPI"
+		],
+		"client": [
+			"com.github.theredbrain.shieldapi.ShieldAPIClient"
+		]
+	},
+	"mixins": [
+		"shieldapi.mixins.json",
+		{
+			"config": "shieldapi.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.20",
+		"minecraft": "1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

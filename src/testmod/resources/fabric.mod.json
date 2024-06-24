@@ -1,0 +1,18 @@
+{
+	"schemaVersion": 1,
+	"id": "shieldapitest",
+	"version": "${version}",
+	"name": "Test Mod",
+	"description": "Test Mod for Shield API",
+	"authors": [],
+	"contact": {},
+	"license": "None",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.github.theredbrain.shieldapitest.ShieldAPITest"
+		]
+	},
+	"mixins": [],
+	"depends": {}
+}
