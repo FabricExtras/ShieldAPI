@@ -1,0 +1,59 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "shieldapitest:item/test_shield",
+		"particle": "shieldapitest:item/test_shield"
+	},
+	"elements": [
+		{
+			"name": "handle",
+			"from": [-1, -3, -5],
+			"to": [1, 3, 1],
+			"faces": {
+				"north": {"uv": [3.5, 5.5, 4, 7], "texture": "#0"},
+				"east": {"uv": [0, 5.5, 1.5, 7], "texture": "#0"},
+				"south": {"uv": [4, 5.5, 4.5, 7], "texture": "#0"},
+				"west": {"uv": [1.5, 5.5, 3, 7], "texture": "#0"},
+				"up": {"uv": [5, 7, 4.5, 5.5], "texture": "#0"},
+				"down": {"uv": [5.5, 5.5, 5, 7], "texture": "#0"}
+			}
+		},
+		{
+			"name": "plate",
+			"from": [-6, -11, 1],
+			"to": [6, 11, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 5.5], "texture": "#0"},
+				"east": {"uv": [3, 5.5, 3.25, 11], "texture": "#0"},
+				"south": {"uv": [3, 0, 6, 5.5], "texture": "#0"},
+				"west": {"uv": [3.25, 5.5, 3.5, 11], "texture": "#0"},
+				"up": {"uv": [8.5, 5.75, 5.5, 5.5], "texture": "#0"},
+				"down": {"uv": [8.5, 5.75, 5.5, 6], "texture": "#0"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		{
+			"name": "root",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "handle",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "plate",
+					"origin": [0, 0, 0],
+					"color": 0,
+					"children": [1]
+				}
+			]
+		}
+	]
+}

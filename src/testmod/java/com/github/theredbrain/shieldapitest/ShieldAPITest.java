@@ -39,14 +39,31 @@ public class ShieldAPITest implements ModInitializer {
 			),
 			new FabricItemSettings().maxDamage(150));
 
+	public static final Item TEST_SHIELD = new CustomShieldItem(
+			null,
+			() -> Ingredient.ofItems(Items.IRON_INGOT),
+			List.of(
+					new Pair<>(
+							EntityAttributes.GENERIC_ARMOR,
+							new EntityAttributeModifier(
+									"test_shield_armor",
+									4.0,
+									EntityAttributeModifier.Operation.ADDITION
+							)
+					)
+			),
+			new FabricItemSettings().maxDamage(150));
+
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Shield API Test initialized!");
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
 			content.add(TEST_BUCKLER);
+			content.add(TEST_SHIELD);
 		});
 		Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "test_buckler"), TEST_BUCKLER);
+		Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "test_shield"), TEST_SHIELD);
 
 		((CustomShieldItem) TEST_BUCKLER).setAttributeModifiers(
 				List.of(
@@ -54,6 +71,19 @@ public class ShieldAPITest implements ModInitializer {
 								EntityAttributes.GENERIC_ARMOR,
 								new EntityAttributeModifier(
 										"test_buckler_armor",
+										2.0,
+										EntityAttributeModifier.Operation.ADDITION
+								)
+						)
+				)
+		);
+
+		((CustomShieldItem) TEST_SHIELD).setAttributeModifiers(
+				List.of(
+						new Pair<>(
+								EntityAttributes.GENERIC_ARMOR,
+								new EntityAttributeModifier(
+										"test_shield_armor",
 										2.0,
 										EntityAttributeModifier.Operation.ADDITION
 								)
