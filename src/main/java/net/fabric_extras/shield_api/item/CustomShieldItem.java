@@ -1,6 +1,6 @@
-package com.github.theredbrain.shieldapi.item;
+package net.fabric_extras.shield_api.item;
 
-import com.github.theredbrain.shieldapi.ShieldAPI;
+import net.fabric_extras.shield_api.ShieldAPI;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.EquipmentSlot;

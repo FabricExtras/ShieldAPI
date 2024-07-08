@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.github.theredbrain.shieldapi.mixin",
+	"package": "net.fabric_extras.shield_api.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"enchantment.BindingCurseEnchantmentMixin",

@@ -1,7 +1,7 @@
-package com.github.theredbrain.shieldapi.mixin.entity.player;
+package net.fabric_extras.shield_api.mixin.entity.player;
 
-import com.github.theredbrain.shieldapi.ShieldAPI;
-import com.github.theredbrain.shieldapi.item.CustomShieldItem;
+import net.fabric_extras.shield_api.ShieldAPI;
+import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
