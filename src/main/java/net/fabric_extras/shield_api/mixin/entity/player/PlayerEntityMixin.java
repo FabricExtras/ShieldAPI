@@ -36,7 +36,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	@Inject(method = "damageShield", at = @At("TAIL"))
-	protected void shieldapi$damageShield(float amount, CallbackInfo ci) {
+	protected void shield_api$damageShield(float amount, CallbackInfo ci) {
 		if (this.activeItemStack.getItem() instanceof CustomShieldItem customShieldItem) {
 			if (!this.getWorld().isClient) {
 				this.incrementStat(Stats.USED.getOrCreateStat(customShieldItem));
@@ -61,7 +61,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	@Inject(method = "disableShield", at = @At("TAIL"))
-	public void shieldapi$disableShield(boolean sprinting, CallbackInfo ci) {
+	public void shield_api$disableShield(boolean sprinting, CallbackInfo ci) {
 		float f = 0.25F + (float) EnchantmentHelper.getEfficiency(this) * 0.05F;
 		if (sprinting) {
 			f += 0.75F;

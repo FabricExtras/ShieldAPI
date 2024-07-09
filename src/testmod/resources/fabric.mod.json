@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "shieldapitest",
+	"id": "shield_api_test",
 	"version": "${version}",
 	"name": "Test Mod",
 	"description": "Test Mod for Shield API",
@@ -10,7 +10,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.github.theredbrain.shieldapitest.ShieldAPITest"
+			"net.fabric_extras.shield_api_test.ShieldAPITest"
 		]
 	},
 	"mixins": [],

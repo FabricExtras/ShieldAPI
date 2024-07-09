@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BindingCurseEnchantmentMixin {
 
 	@Inject(method = "isAcceptableItem", at = @At("RETURN"), cancellable = true)
-	public void isAcceptableItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+	public void shield_api$isAcceptableItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		cir.setReturnValue(cir.getReturnValue() && !(stack.getItem() instanceof CustomShieldItem));
 	}
 }

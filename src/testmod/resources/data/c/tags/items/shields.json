@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "shield_api_test:test_buckler",
+    "shield_api_test:test_shield"
+  ]
+}

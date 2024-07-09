@@ -23,7 +23,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 	}
 
 	@Inject(method = "disablePlayerShield", at = @At("TAIL"))
-	private void shieldapi$disablePlayerShield(PlayerEntity player, ItemStack mobStack, ItemStack playerStack, CallbackInfo ci) {
+	private void shield_api$disablePlayerShield(PlayerEntity player, ItemStack mobStack, ItemStack playerStack, CallbackInfo ci) {
 		if (!mobStack.isEmpty() && !playerStack.isEmpty() && mobStack.getItem() instanceof AxeItem && playerStack.getItem() instanceof CustomShieldItem playerStackItem) {
 			float f = 0.25F + (float) EnchantmentHelper.getEfficiency(this) * 0.05F;
 			if (this.random.nextFloat() < f) {
