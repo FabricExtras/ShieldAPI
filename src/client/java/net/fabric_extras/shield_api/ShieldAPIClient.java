@@ -1,4 +1,4 @@
-package com.github.theredbrain.shieldapi;
+package net.fabric_extras.shield_api;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;

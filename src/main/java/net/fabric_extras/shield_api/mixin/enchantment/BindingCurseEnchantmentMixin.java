@@ -1,6 +1,6 @@
-package com.github.theredbrain.shieldapi.mixin.enchantment;
+package net.fabric_extras.shield_api.mixin.enchantment;
 
-import com.github.theredbrain.shieldapi.item.CustomShieldItem;
+import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.minecraft.enchantment.BindingCurseEnchantment;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

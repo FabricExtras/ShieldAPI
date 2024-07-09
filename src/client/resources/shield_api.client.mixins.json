@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.github.theredbrain.shieldapi.mixin.client",
+	"package": "net.fabric_extras.shield_api.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"MinecraftClientMixin"

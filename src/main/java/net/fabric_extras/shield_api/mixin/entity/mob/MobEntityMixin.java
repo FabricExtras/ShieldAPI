@@ -1,6 +1,6 @@
-package com.github.theredbrain.shieldapi.mixin.entity.mob;
+package net.fabric_extras.shield_api.mixin.entity.mob;
 
-import com.github.theredbrain.shieldapi.item.CustomShieldItem;
+import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;

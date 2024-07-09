@@ -1,6 +1,6 @@
 package com.github.theredbrain.shieldapitest;
 
-import com.github.theredbrain.shieldapi.item.CustomShieldItem;
+import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;

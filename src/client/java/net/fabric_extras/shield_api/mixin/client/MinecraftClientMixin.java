@@ -1,8 +1,8 @@
-package com.github.theredbrain.shieldapi.mixin.client;
+package net.fabric_extras.shield_api.mixin.client;
 
-import com.github.theredbrain.shieldapi.ShieldAPI;
-import com.github.theredbrain.shieldapi.ShieldAPIClient;
-import com.github.theredbrain.shieldapi.item.CustomShieldItem;
+import net.fabric_extras.shield_api.ShieldAPI;
+import net.fabric_extras.shield_api.ShieldAPIClient;
+import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
