@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "shieldapitest:item/test_shield",
-		"particle": "shieldapitest:item/test_shield"
+		"0": "shield_api_test:item/test_shield",
+		"particle": "shield_api_test:item/test_shield"
 	},
 	"elements": [
 		{

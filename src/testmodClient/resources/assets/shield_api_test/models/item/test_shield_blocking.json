@@ -1,5 +1,5 @@
 {
-	"parent": "shieldapitest:item/test_shield_template",
+	"parent": "shield_api_test:item/test_shield_template",
 	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {

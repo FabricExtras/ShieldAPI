@@ -20,7 +20,7 @@ loom {
     splitEnvironmentSourceSets()
 
     mods {
-        "shieldapi" {
+        "shield_api" {
             sourceSet sourceSets.main
             sourceSet sourceSets.client
         }
@@ -57,6 +57,13 @@ loom {
             ideConfigGenerated project.rootProject == project
             name = "Testmod Server"
             source sourceSets.testmod
+        }
+    }
+
+    mods {
+        "shield_api_test" {
+            sourceSet sourceSets.testmod
+            sourceSet sourceSets.testmodClient
         }
     }
 }

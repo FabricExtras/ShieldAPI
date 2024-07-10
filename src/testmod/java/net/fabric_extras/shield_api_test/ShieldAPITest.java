@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class ShieldAPITest implements ModInitializer {
-	public static final String MOD_ID = "shieldapitest";
+	public static final String MOD_ID = "shield_api_test";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final Item TEST_BUCKLER = new CustomShieldItem(

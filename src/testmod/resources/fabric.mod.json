@@ -11,6 +11,9 @@
 	"entrypoints": {
 		"main": [
 			"net.fabric_extras.shield_api_test.ShieldAPITest"
+		],
+		"client": [
+			"net.fabric_extras.shield_api_test.ShieldAPITestClient"
 		]
 	},
 	"mixins": [],

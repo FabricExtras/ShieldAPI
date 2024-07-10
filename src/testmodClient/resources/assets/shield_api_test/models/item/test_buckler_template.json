@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "shieldapitest:item/test_buckler",
-		"particle": "shieldapitest:item/test_buckler"
+		"0": "shield_api_test:item/test_buckler",
+		"particle": "shield_api_test:item/test_buckler"
 	},
 	"elements": [
 		{
