@@ -1,6 +1,5 @@
 package net.fabric_extras.shield_api.item;
 
-import net.fabric_extras.shield_api.ShieldAPI;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.EquipmentSlot;
@@ -13,12 +12,14 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class CustomShieldItem extends ShieldItem {
 
 	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
+	public final static HashSet<CustomShieldItem> instances = new HashSet<>();
 
 	@Nullable
 	private final SoundEvent equipSound;
@@ -30,7 +31,7 @@ public class CustomShieldItem extends ShieldItem {
 		this.attributeModifiers = buildModifiers(attributeModifierList);
 		this.equipSound = equipSound;
 		this.repairIngredientSupplier = repairIngredientSupplier;
-		ShieldAPI.instances.add(this);
+		instances.add(this);
 	}
 
 	@Override

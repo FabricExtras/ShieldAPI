@@ -1,6 +1,5 @@
 package net.fabric_extras.shield_api.mixin.entity.player;
 
-import net.fabric_extras.shield_api.ShieldAPI;
 import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityStatuses;
@@ -35,7 +34,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		super(entityType, world);
 	}
 
-	@Inject(method = "damageShield", at = @At("TAIL"))
+	@Inject(method = "damageShield", at = @At("HEAD"))
 	protected void shield_api$damageShield(float amount, CallbackInfo ci) {
 		if (this.activeItemStack.getItem() instanceof CustomShieldItem customShieldItem) {
 			if (!this.getWorld().isClient) {
@@ -68,7 +67,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		}
 
 		if (this.random.nextFloat() < f) {
-			for (CustomShieldItem customShieldItem : ShieldAPI.instances) {
+			for (CustomShieldItem customShieldItem : CustomShieldItem.instances) {
 				this.getItemCooldownManager().set(customShieldItem, 100);
 			}
 			this.clearActiveItem();
