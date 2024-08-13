@@ -1,8 +1,6 @@
 package net.fabric_extras.shield_api.mixin.entity.player;
 
 import net.fabric_extras.shield_api.item.CustomShieldItem;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -44,7 +42,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 			if (amount >= 3.0F) {
 				int i = 1 + MathHelper.floor(amount);
 				Hand hand = this.getActiveHand();
-				this.activeItemStack.damage(i, this, player -> player.sendToolBreakStatus(hand));
+				this.activeItemStack.damage(i, this, getSlotForHand(hand));
 				if (this.activeItemStack.isEmpty()) {
 					if (hand == Hand.MAIN_HAND) {
 						this.equipStack(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
@@ -59,19 +57,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		}
 	}
 
-	@Inject(method = "disableShield", at = @At("TAIL"))
-	public void shield_api$disableShield(boolean sprinting, CallbackInfo ci) {
-		float f = 0.25F + (float) EnchantmentHelper.getEfficiency(this) * 0.05F;
-		if (sprinting) {
-			f += 0.75F;
-		}
-
-		if (this.random.nextFloat() < f) {
-			for (CustomShieldItem customShieldItem : CustomShieldItem.instances) {
-				this.getItemCooldownManager().set(customShieldItem, 100);
-			}
-			this.clearActiveItem();
-			this.getWorld().sendEntityStatus(this, EntityStatuses.BREAK_SHIELD);
+	@Inject(method = "disableShield", at = @At("HEAD"))
+	public void shield_api$disableShield(CallbackInfo ci) {
+		for (CustomShieldItem customShieldItem : CustomShieldItem.instances) {
+			this.getItemCooldownManager().set(customShieldItem, 100);
 		}
 	}
 

@@ -1,7 +1,6 @@
 package net.fabric_extras.shield_api;
 
 import net.fabricmc.api.ModInitializer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

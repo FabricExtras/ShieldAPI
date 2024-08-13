@@ -12,6 +12,6 @@ public class ShieldAPIClient implements ClientModInitializer {
 	}
 
 	public static void registerModelPredicateProviders(Item item) {
-		ModelPredicateProviderRegistry.register(item, new Identifier("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
+		ModelPredicateProviderRegistry.register(item, Identifier.of("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
 	}
 }

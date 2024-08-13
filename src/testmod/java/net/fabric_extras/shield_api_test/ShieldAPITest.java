@@ -2,7 +2,6 @@ package net.fabric_extras.shield_api_test;
 
 import net.fabric_extras.shield_api.item.CustomShieldItem;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -30,13 +29,13 @@ public class ShieldAPITest implements ModInitializer {
 					new Pair<>(
 							EntityAttributes.GENERIC_ARMOR,
 							new EntityAttributeModifier(
-									"test_buckler_armor",
+									Identifier.of(MOD_ID, "shield"),
 									4.0,
-									EntityAttributeModifier.Operation.ADDITION
+									EntityAttributeModifier.Operation.ADD_VALUE
 							)
 					)
 			),
-			new FabricItemSettings().maxDamage(150));
+			new Item.Settings().maxDamage(150));
 
 	public static final Item TEST_SHIELD = new CustomShieldItem(
 			null,
@@ -45,13 +44,13 @@ public class ShieldAPITest implements ModInitializer {
 					new Pair<>(
 							EntityAttributes.GENERIC_ARMOR,
 							new EntityAttributeModifier(
-									"test_shield_armor",
+									Identifier.of(MOD_ID, "shield"),
 									4.0,
-									EntityAttributeModifier.Operation.ADDITION
+									EntityAttributeModifier.Operation.ADD_VALUE
 							)
 					)
 			),
-			new FabricItemSettings().maxDamage(150));
+			new Item.Settings().maxDamage(150));
 
 	@Override
 	public void onInitialize() {
@@ -69,9 +68,9 @@ public class ShieldAPITest implements ModInitializer {
 						new Pair<>(
 								EntityAttributes.GENERIC_ARMOR,
 								new EntityAttributeModifier(
-										"test_buckler_armor",
+										Identifier.of(MOD_ID, "shield"),
 										2.0,
-										EntityAttributeModifier.Operation.ADDITION
+										EntityAttributeModifier.Operation.ADD_VALUE
 								)
 						)
 				)
@@ -82,9 +81,9 @@ public class ShieldAPITest implements ModInitializer {
 						new Pair<>(
 								EntityAttributes.GENERIC_ARMOR,
 								new EntityAttributeModifier(
-										"test_shield_armor",
+										Identifier.of(MOD_ID, "shield"),
 										2.0,
-										EntityAttributeModifier.Operation.ADDITION
+										EntityAttributeModifier.Operation.ADD_VALUE
 								)
 						)
 				)
