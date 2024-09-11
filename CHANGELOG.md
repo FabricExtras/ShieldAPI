@@ -1,5 +1,9 @@
 # 2.0.1
 
+- lowered Fabric Loader requirements
+
+# 2.0.1
+
 - now compatible with 1.21
 
 # 2.0.0
