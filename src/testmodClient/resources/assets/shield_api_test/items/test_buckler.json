@@ -1,0 +1,14 @@
+{
+	"model": {
+		"type": "minecraft:condition",
+		"on_false": {
+			"type": "minecraft:model",
+			"model": "shield_api_test:item/test_buckler"
+		},
+		"on_true": {
+			"type": "minecraft:model",
+			"model": "shield_api_test:item/test_buckler_blocking"
+		},
+		"property": "minecraft:using_item"
+	}
+}
