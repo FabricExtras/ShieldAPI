@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "shield_api",
+	"version": "${version}",
+	"name": "Shield API",
+	"description": "Creating shields with custom models was never easier!",
+	"authors": [
+		"TheRedBrain"
+	],
+	"contact": {
+		"sources": "https://github.com/FabricExtras/ShieldAPI"
+	},
+	"license": "MIT",
+	"icon": "icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.fabric_extras.fabric.FabricMod"
+		],
+		"client": [
+          "net.fabric_extras.fabric.client.FabricClientMod"
+		]
+	},
+	"mixins": [
+		"shield_api.mixins.json"
+	],
+	"depends": {
+		"minecraft": ">=${minecraft_version_compat} <=${minecraft_version}",
+		"fabricloader": ">=${fabric_loader_version}"
+	}
+}

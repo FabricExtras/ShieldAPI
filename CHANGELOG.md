@@ -1,3 +1,7 @@
+# 2.1.0
+
+- migrated to Architectury
+
 # 2.0.1
 
 - lowered Fabric Loader requirements
