@@ -65,4 +65,8 @@ public class CustomShieldItem extends ShieldItem {
 	public @Nullable RegistryEntry<SoundEvent> getEquipSound() {
 		return this.equipSound != null ? this.equipSound : super.getEquipSound();
 	}
+
+	public Supplier<Ingredient> getRepairIngredientSupplier() {
+		return repairIngredientSupplier;
+	}
 }

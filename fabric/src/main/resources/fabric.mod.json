@@ -19,6 +19,9 @@
 		],
 		"client": [
           "net.fabric_extras.fabric.client.FabricClientMod"
+		],
+		"emi": [
+			"net.fabric_extras.shield_api.compat.emi.ShieldAPIEmiPlugin"
 		]
 	},
 	"mixins": [
