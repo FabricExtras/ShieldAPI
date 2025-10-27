@@ -1,3 +1,7 @@
+# 2.2.0
+
+- added compatibility for EMI repair recipes
+
 # 2.1.0
 
 - migrated to Architectury
