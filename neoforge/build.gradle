@@ -1,7 +1,6 @@
 plugins {
+    id "me.modmuss50.mod-publish-plugin" version "2.1.1"
     id 'com.gradleup.shadow'
-    id "com.matthewprenger.cursegradle" version "1.4.0"
-    id "com.modrinth.minotaur" version "2.+"
 }
 
 def platform = project.name;
@@ -100,46 +99,55 @@ remapJar {
     inputFile.set shadowJar.archiveFile
 }
 
-if(project.hasProperty('release_type')) {
-    tasks.register("publishMod") {
-        dependsOn(build)
-        finalizedBy(tasks.curseforge)
-        finalizedBy(tasks.modrinth)
-    }
+// Publishing configuration
+def releaseTypeName = (project.findProperty('release_type') ?: 'beta').toString()
 
+// Local convenience alias -- CI invokes the per-destination publish tasks directly.
+tasks.register("publishMod") {
+    dependsOn(build)
+    finalizedBy(tasks.named("publishMods"))
+}
+
+publishMods {
+    file = remapJar.archiveFile
+    changelog = providers.provider { changelog_last_section() }
+    type = releaseTypeName == "release" ? me.modmuss50.mpp.ReleaseType.STABLE
+            : releaseTypeName == "alpha" ? me.modmuss50.mpp.ReleaseType.ALPHA
+            : me.modmuss50.mpp.ReleaseType.BETA
+    version = "${project.version}-${platform}"
+    displayName = "${project.version}"
+    modLoaders.add("neoforge")
+
+    // Standalone library: no required dependencies on either host.
     curseforge {
-        apiKey = System.getenv("CURSEFORGE_API_KEY")
-        project {
-            id = System.getenv("CURSEFORGE_PROJECT_ID")
-            changelog = changelog_last_section()
-            changelogType = 'markdown'
-            releaseType = release_type
-            addGameVersion "${project.minecraft_version}"
-            addGameVersion "${project.minecraft_version_compat}"
-            addGameVersion "NeoForge"
-
-            mainArtifact(remapJar)
-            afterEvaluate {
-                uploadTask.dependsOn(remapJar)
-            }
-            options {
-                forgeGradleIntegration = false
-            }
-        }
+        projectId = providers.environmentVariable("CURSEFORGE_PROJECT_ID")
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        minecraftVersions.add(project.minecraft_version)
+        minecraftVersions.add(project.minecraft_version_compat)
+        client = true
+        server = true
+        changelogType = "markdown"
     }
 
     modrinth {
-        token = System.getenv("MODRINTH_API_KEY")
-        projectId = System.getenv("MODRINTH_PROJECT_ID") // This can be the project ID or the slug. Either will work!
-        changelog = changelog_last_section()
-        versionName = "${version}" // You don't need to set this manually. Will fail if Modrinth has this version already
-        versionNumber = "${version}-neoforge" // You don't need to set this manually. Will fail if Modrinth has this version already
-        versionType = release_type // This is the default -- can also be `beta` or `alpha`
-        uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
-        gameVersions = ["${project.minecraft_version}", "${project.minecraft_version_compat}"] // Must be an array, even with only one version
-        loaders = ["neoforge"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
-        changelog = changelog_last_section()
-        dependencies { // A special DSL for creating dependencies
-        }
+        environment = me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment.CLIENT_AND_SERVER
+        projectId = providers.environmentVariable("MODRINTH_PROJECT_ID")
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        minecraftVersions.add(project.minecraft_version)
+        minecraftVersions.add(project.minecraft_version_compat)
     }
+
+    github {
+        repository = providers.environmentVariable("GH_OWNER")
+                .zip(providers.environmentVariable("GH_REPO")) { owner, repo -> "$owner/$repo" }
+        accessToken = providers.environmentVariable("GH_API_KEY")
+        tagName = "${project.version}-${platform}"
+        commitish = providers.environmentVariable("GITHUB_SHA")
+    }
+}
+
+// GitHub release last: a failed mod upload aborts the build before the release exists.
+// Ordering only -- unselected tasks are ignored. Must sit after the publishMods block.
+tasks.named("publishGithub") {
+    mustRunAfter(tasks.named("publishCurseforge"), tasks.named("publishModrinth"))
 }
