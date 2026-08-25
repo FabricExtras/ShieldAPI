@@ -1,5 +1,5 @@
 {
-	"parent": "shield_api_test:item/test_buckler_template",
+	"parent": "shield_api_test:item/test_shield_template",
 	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
@@ -34,13 +34,5 @@
 			"translation": [-4.5, 4.5, -5],
 			"scale": [0.55, 0.55, 0.55]
 		}
-	},
-	"overrides": [
-		{
-			"predicate": {
-				"blocking": 1
-			},
-			"model": "shield_api_test:item/test_buckler_blocking"
-		}
-	]
+	}
 }

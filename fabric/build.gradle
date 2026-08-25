@@ -36,9 +36,25 @@ sourceSets {
 
 loom {
     runs {
-        testmod_fabric {
+        testmodClient {
+            inherit client
+            // `inherit` links devLaunchMainClass to the parent's Property (convention(Provider)).
+            // architectury's platformSetupLoomIde() later rewrites each run's main class to
+            // TransformerRuntime and records the *previous* value in the shared
+            // fabric/.gradle/architectury/.main_class file. With a live link, this run would
+            // see the already-rewritten parent value and record TransformerRuntime itself,
+            // making every IDE run config launch TransformerRuntime recursively (infinite
+            // "Architectury Runtime ... Read classpath" loop). Snapshot the value instead.
+            devLaunchMainClass = client.devLaunchMainClass.get()
             ideConfigGenerated project.rootProject == project
-            name "Test Mod Fabric"
+            name "Test Mod Client"
+            source sourceSets.testmod_fabric
+        }
+        testmodServer {
+            inherit server
+            devLaunchMainClass = server.devLaunchMainClass.get()
+            ideConfigGenerated project.rootProject == project
+            name "Test Mod Server"
             source sourceSets.testmod_fabric
         }
     }

@@ -3,14 +3,9 @@
   "package": "net.fabric_extras.shield_api.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "client.MinecraftClientMixin",
-    "entity.player.PlayerEntityMixin",
-    "item.AxeItemMixin"
+    "item.ItemStackRepairMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "client.ModelPredicateProviderRegistryInvoker"
-  ]
+  }
 }
