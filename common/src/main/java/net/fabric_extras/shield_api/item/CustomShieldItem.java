@@ -28,8 +28,8 @@ import java.util.function.Supplier;
  * <p>
  * Since 1.21.2 all blocking behaviour (damage reduction, item damage, disable cooldown, axe interactions,
  * the `blocking` item model state) is data driven via the {@code minecraft:blocks_attacks} component,
- * so this class mostly assembles vanilla-equivalent components on top of the settings it is given.
- * Callers may override any of them by setting the component on the passed {@link Settings} beforehand.
+ * so this class mostly assembles vanilla-equivalent components on top of the settings it is given
+ * (the components applied here win over anything already set on the passed settings).
  */
 public class CustomShieldItem extends ShieldItem {
 
