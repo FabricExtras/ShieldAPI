@@ -10,8 +10,6 @@ repositories {
 }
 
 
-def platform = "fabric";
-
 //sourceSets {
 //    testmod {
 //        compileClasspath += main.compileClasspath
@@ -41,5 +39,13 @@ dependencies {
     // Do NOT use other classes from Fabric Loader.
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
-    modCompileOnly "dev.emi:emi-${platform}:${emi_version}"
+    // EMI integration: loader-neutral artifact, platform jars are provided by the platform modules
+    if (rootProject.enable_emi.toBoolean()) {
+        modCompileOnly "dev.emi:emi-xplat-intermediary:${emi_version}"
+    }
+}
+
+// EMI has no 1.21.11 build: keep the plugin sources in-tree but out of the compilation unless enabled.
+if (!rootProject.enable_emi.toBoolean()) {
+    sourceSets.main.java.exclude '**/compat/emi/**'
 }

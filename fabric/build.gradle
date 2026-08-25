@@ -72,9 +72,10 @@ dependencies {
     // Fabric API, only for the testmod
     modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
 
-    // EMI integration
-    modCompileOnly "dev.emi:emi-${platform}:${emi_version}"
-    modLocalRuntime "dev.emi:emi-${platform}:${emi_version}"
+    // EMI integration (compile classpath comes from :common's xplat dependency)
+    if (rootProject.enable_emi.toBoolean()) {
+        modLocalRuntime "dev.emi:emi-${platform}:${emi_version}"
+    }
 }
 
 processResources {
@@ -118,7 +119,7 @@ publishMods {
         projectId = providers.environmentVariable("CURSEFORGE_PROJECT_ID")
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         minecraftVersions.add(project.minecraft_version)
-        minecraftVersions.add(project.minecraft_version_compat)
+        if (project.minecraft_version_compat != project.minecraft_version) minecraftVersions.add(project.minecraft_version_compat)
         client = true
         server = true
         changelogType = "markdown"
@@ -129,7 +130,7 @@ publishMods {
         projectId = providers.environmentVariable("MODRINTH_PROJECT_ID")
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         minecraftVersions.add(project.minecraft_version)
-        minecraftVersions.add(project.minecraft_version_compat)
+        if (project.minecraft_version_compat != project.minecraft_version) minecraftVersions.add(project.minecraft_version_compat)
     }
 
     github {
