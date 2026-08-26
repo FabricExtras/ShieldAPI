@@ -10,7 +10,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ShieldItem;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.sound.SoundEvent;
@@ -21,7 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * A shield item with a custom model, custom repair ingredient, custom equip sound and configurable attributes.
@@ -46,15 +44,12 @@ public class CustomShieldItem extends ShieldItem {
 
 	public final static HashSet<CustomShieldItem> instances = new HashSet<>();
 
-	private final Supplier<Ingredient> repairIngredientSupplier;
 	private ComponentMap components;
 
 	public CustomShieldItem(@Nullable RegistryEntry<SoundEvent> equipSound,
-							Supplier<Ingredient> repairIngredientSupplier,
 							List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> attributeModifierList,
 							Settings settings) {
 		super(configure(equipSound, attributeModifierList, settings));
-		this.repairIngredientSupplier = repairIngredientSupplier;
 		this.components = super.getComponents();
 		instances.add(this);
 	}
@@ -103,9 +98,5 @@ public class CustomShieldItem extends ShieldItem {
 			builder.add(pair.getLeft(), pair.getRight(), AttributeModifierSlot.HAND);
 		}
 		return builder.build();
-	}
-
-	public Supplier<Ingredient> getRepairIngredientSupplier() {
-		return repairIngredientSupplier;
 	}
 }

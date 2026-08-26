@@ -3,7 +3,6 @@
   "package": "net.fabric_extras.shield_api.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "item.ItemStackRepairMixin"
   ],
   "injectors": {
     "defaultRequire": 1
