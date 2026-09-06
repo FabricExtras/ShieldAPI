@@ -37,7 +37,7 @@ public class ShieldAPIEmiPlugin implements EmiPlugin {
 		var itemId = itemEntry.getKey().get().getValue();
 
 		// Create the anvil recipe
-		Identifier id = Identifier.of(itemId.getNamespace(), "anvil_repair_shield_api/" +
+		Identifier id = new Identifier(itemId.getNamespace(), "anvil_repair_shield_api/" +
 				itemId.getPath());
 
 		EmiStack input = EmiStack.of(item);

@@ -9,37 +9,15 @@ repositories {
     }
 }
 
-
-def platform = "fabric";
-
-//sourceSets {
-//    testmod {
-//        compileClasspath += main.compileClasspath
-//        runtimeClasspath += main.runtimeClasspath
-//    }
-//}
-//
-//loom {
-//    runs {
-//        testmod {
-//            ideConfigGenerated project.rootProject == project
-//            name "Test Mod"
-//            source sourceSets.testmod
-//        }
-//    }
-//
-//    mods {
-//        "shield_api_test" {
-//            sourceSet sourceSets.testmod
-//        }
-//    }
-//}
-
 dependencies {
     // We depend on Fabric Loader here to use the Fabric @Environment annotations,
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
-    modCompileOnly "dev.emi:emi-${platform}:${emi_version}"
+    // EMI: the loader-agnostic, intermediary-mapped artifact. Remapping the platform
+    // `emi-fabric` jar inside the fabric-api-less `:common` module half-remaps it and
+    // poisons the shared cross-subproject Loom cache. No `:api` classifier here --
+    // ShieldAPIEmiPlugin uses `dev.emi.emi.recipe.EmiAnvilRecipe`, an impl class.
+    modCompileOnly "dev.emi:emi-xplat-intermediary:$rootProject.emi_version"
 }

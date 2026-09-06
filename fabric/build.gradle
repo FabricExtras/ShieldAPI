@@ -73,15 +73,15 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
 
     // EMI integration
-    modCompileOnly "dev.emi:emi-${platform}:${emi_version}"
-    modLocalRuntime "dev.emi:emi-${platform}:${emi_version}"
+    modCompileOnly "dev.emi:emi-${platform}:$rootProject.emi_version"
+    modLocalRuntime "dev.emi:emi-${platform}:$rootProject.emi_version"
 }
 
 processResources {
     inputs.property 'version', project.version
 
     filesMatching("fabric.mod.json") {
-        expand(project.properties)
+        expand version: inputs.properties.version
     }
 }
 
@@ -118,7 +118,6 @@ publishMods {
         projectId = providers.environmentVariable("CURSEFORGE_PROJECT_ID")
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         minecraftVersions.add(project.minecraft_version)
-        minecraftVersions.add(project.minecraft_version_compat)
         client = true
         server = true
         changelogType = "markdown"
@@ -129,7 +128,6 @@ publishMods {
         projectId = providers.environmentVariable("MODRINTH_PROJECT_ID")
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         minecraftVersions.add(project.minecraft_version)
-        minecraftVersions.add(project.minecraft_version_compat)
     }
 
     github {

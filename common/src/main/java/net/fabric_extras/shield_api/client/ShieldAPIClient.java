@@ -10,6 +10,9 @@ public class ShieldAPIClient {
 	}
 
 	public static void registerModelPredicateProviders(Item item) {
-		ModelPredicateProviderRegistryInvoker.invokeRegister(item, Identifier.of("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
+		// `ModelPredicateProviderRegistry.register(Item, Identifier, ClampedModelPredicateProvider)` is
+		// public in vanilla 1.20.1 but PRIVATE in the Forge-patched class, so the invoker mixin is what
+		// keeps a single common code path across both loaders.
+		ModelPredicateProviderRegistryInvoker.invokeRegister(item, new Identifier("blocking"), (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
 	}
 }
