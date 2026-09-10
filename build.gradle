@@ -10,7 +10,9 @@ architectury {
 
 allprojects {
     group = rootProject.maven_group
-    version = rootProject.mod_version
+    // Game version suffix, as on the pre-Architectury 1.20.1 line: the 1.21.1 branch already
+    // publishes `2.2.0-fabric`, so a bare `mod_version` here would collide on Modrinth.
+    version = "$rootProject.mod_version+$rootProject.minecraft_version"
 }
 
 subprojects {
