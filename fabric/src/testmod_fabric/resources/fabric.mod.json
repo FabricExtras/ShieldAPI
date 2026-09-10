@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"id": "shield_api_test",
+	"version": "${version}",
+	"name": "Test Mod",
+	"description": "Test Mod for Shield API",
+	"authors": [],
+	"contact": {},
+	"license": "None",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.fabric_extras.shield_api_test.FabricTestMod"
+		],
+		"client": [
+			"net.fabric_extras.shield_api_test.client.FabricTestClientMod"
+		]
+	},
+	"mixins": [],
+	"depends": {}
+}

@@ -28,7 +28,7 @@ gradle.properties
 
 ```
 # replace with latest version
-shield_api_version=1.0.0
+shield_api_version=2.1.0
 ```
 
 ## Usage
