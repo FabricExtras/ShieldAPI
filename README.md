@@ -20,7 +20,10 @@ repositories {
 }
 
 dependencies {
-    modImplementation "maven.modrinth:shield-api:${project.shield_api_version}"
+    // pick the artifact matching your platform module
+    modImplementation "maven.modrinth:bundle-api-fabric:${project.bundle_api_version}"
+    // or
+    modImplementation "maven.modrinth:bundle-api-forge:${project.bundle_api_version}"
 }
 ```
 
@@ -28,7 +31,7 @@ gradle.properties
 
 ```
 # replace with latest version
-shield_api_version=2.1.0
+shield_api_version=1.1.0+1.20.1
 ```
 
 ## Usage

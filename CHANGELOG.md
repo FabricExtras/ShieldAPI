@@ -1,3 +1,7 @@
+# 1.1.0
+
+- migrated to Architectury, added support for Forge, backported 1.21.1 features (Thanks Daedelus for the PR!)
+
 # 2.2.0
 
 - added compatibility for EMI repair recipes
