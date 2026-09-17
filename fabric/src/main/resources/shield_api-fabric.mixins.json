@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.fabric_extras.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerEntityDamageShieldMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

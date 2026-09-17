@@ -1,0 +1,146 @@
+plugins {
+    id "me.modmuss50.mod-publish-plugin" version "2.1.1"
+    id 'com.gradleup.shadow'
+}
+
+def platform = project.name;
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+
+    // Files in this configuration will be bundled into your mod using the Shadow plugin.
+    // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
+    shadowBundle {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+sourceSets {
+    testmod_fabric {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+    }
+}
+
+loom {
+    runs {
+        testmod_fabric {
+            ideConfigGenerated project.rootProject == project
+            name "Test Mod Fabric"
+            source sourceSets.testmod_fabric
+        }
+    }
+
+    mods {
+        "shield_api_test" {
+            sourceSet sourceSets.testmod_fabric
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
+
+    // Fabric API, only for the testmod
+    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+
+    // EMI integration
+    modCompileOnly "dev.emi:emi-${platform}:$rootProject.emi_version"
+    modLocalRuntime "dev.emi:emi-${platform}:$rootProject.emi_version"
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching("fabric.mod.json") {
+        expand version: inputs.properties.version
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+}
+
+// Publishing configuration
+def releaseTypeName = (project.findProperty('release_type') ?: 'beta').toString()
+
+// Local convenience alias -- CI invokes the per-destination publish tasks directly.
+tasks.register("publishMod") {
+    dependsOn(build)
+    finalizedBy(tasks.named("publishMods"))
+}
+
+publishMods {
+    file = remapJar.archiveFile
+    changelog = providers.provider { changelog_last_section() }
+    type = releaseTypeName == "release" ? me.modmuss50.mpp.ReleaseType.STABLE
+            : releaseTypeName == "alpha" ? me.modmuss50.mpp.ReleaseType.ALPHA
+            : me.modmuss50.mpp.ReleaseType.BETA
+    version = "${project.version}-${platform}"
+    displayName = "${project.version}"
+    modLoaders.add("fabric")
+
+    // Standalone library: no required dependencies on either host.
+    curseforge {
+        projectId = providers.environmentVariable("CURSEFORGE_PROJECT_ID")
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        minecraftVersions.add(project.minecraft_version)
+        client = true
+        server = true
+        changelogType = "markdown"
+    }
+
+    modrinth {
+        environment = me.modmuss50.mpp.platforms.modrinth.ModrinthEnvironment.CLIENT_AND_SERVER
+        projectId = providers.environmentVariable("MODRINTH_PROJECT_ID")
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        minecraftVersions.add(project.minecraft_version)
+    }
+
+    github {
+        repository = providers.environmentVariable("GH_OWNER")
+                .zip(providers.environmentVariable("GH_REPO")) { owner, repo -> "$owner/$repo" }
+        accessToken = providers.environmentVariable("GH_API_KEY")
+        tagName = "${project.version}-${platform}"
+        commitish = providers.environmentVariable("GITHUB_SHA")
+    }
+}
+
+// GitHub release last: a failed mod upload aborts the build before the release exists.
+// Ordering only -- unselected tasks are ignored. Must sit after the publishMods block.
+tasks.named("publishGithub") {
+    mustRunAfter(tasks.named("publishCurseforge"), tasks.named("publishModrinth"))
+}

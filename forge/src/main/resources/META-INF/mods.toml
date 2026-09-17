@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "shield_api"
+version = "${version}"
+displayName = "ShieldAPI"
+authors = "TheRedBrain"
+description = '''
+Creating shields with custom models was never easier!
+'''
+logoFile = "icon.png"
+
+[[dependencies.shield_api]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.shield_api]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
