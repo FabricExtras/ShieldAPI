@@ -36,16 +36,11 @@ sourceSets {
 
 loom {
     runs {
-        testmod_fabric {
-            ideConfigGenerated project.rootProject == project
+        shield_api_test {
+            inherit client
+//            ideConfigGenerated project.rootProject == project
             name "Test Mod Fabric"
             source sourceSets.testmod_fabric
-        }
-    }
-
-    mods {
-        "shield_api_test" {
-            sourceSet sourceSets.testmod_fabric
         }
     }
 }
@@ -86,12 +81,9 @@ processResources {
 }
 
 shadowJar {
+    dependsOn remapJar
     configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
-}
-
-remapJar {
-    inputFile.set shadowJar.archiveFile
+    archiveClassifier = null
 }
 
 // Publishing configuration
@@ -104,7 +96,7 @@ tasks.register("publishMod") {
 }
 
 publishMods {
-    file = remapJar.archiveFile
+    file = shadowJar.archiveFile
     changelog = providers.provider { changelog_last_section() }
     type = releaseTypeName == "release" ? me.modmuss50.mpp.ReleaseType.STABLE
             : releaseTypeName == "alpha" ? me.modmuss50.mpp.ReleaseType.ALPHA
