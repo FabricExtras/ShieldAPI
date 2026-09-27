@@ -1,3 +1,7 @@
+# 1.1.2
+
+- same again, because it's so much fun
+
 # 1.1.1
 
 - fixed Forge jar being empty

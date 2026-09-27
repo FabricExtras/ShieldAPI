@@ -81,9 +81,12 @@ processResources {
 }
 
 shadowJar {
-    dependsOn remapJar
     configurations = [project.configurations.shadowBundle]
-    archiveClassifier = null
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
 }
 
 assemble.dependsOn shadowJar
@@ -98,7 +101,7 @@ tasks.register("publishMod") {
 }
 
 publishMods {
-    file = shadowJar.archiveFile
+    file = remapJar.archiveFile
     changelog = providers.provider { changelog_last_section() }
     type = releaseTypeName == "release" ? me.modmuss50.mpp.ReleaseType.STABLE
             : releaseTypeName == "alpha" ? me.modmuss50.mpp.ReleaseType.ALPHA
