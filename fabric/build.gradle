@@ -86,6 +86,8 @@ shadowJar {
     archiveClassifier = null
 }
 
+assemble.dependsOn shadowJar
+
 // Publishing configuration
 def releaseTypeName = (project.findProperty('release_type') ?: 'beta').toString()
 

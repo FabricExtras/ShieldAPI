@@ -1,3 +1,7 @@
+# 1.1.1
+
+- fixed Forge jar being empty
+
 # 1.1.0
 
 - migrated to Architectury, added support for Forge, backported 1.21.1 features (Thanks Daedelus for the PR!)
